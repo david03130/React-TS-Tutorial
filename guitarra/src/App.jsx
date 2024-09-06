@@ -5,10 +5,34 @@ import { db } from './data/db';
 
 function App() {
   const [data, setData] = useState(db);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(initialCart);
+
+  //#region Effect Hooks
+  useEffect(
+    function updateLocalStorageOnCartChange() {
+      localStorage.setItem("cart", JSON.stringify(cart))
+    }, [cart])
+
+  //#endregion
+
+  //#region Initial States
+  function initialCart() {
+    const cartString = localStorage.getItem("cart");
+    return cartString ? JSON.parse(cartString) : [];
+  }
+
+  //#endregion
+
+  //#region Handlers
+  function handleAddToCart(item) {
+    addItem(item);
+  }
+
+  //#endregion
 
   //#region Functions
-  function handleAddToCart(item) {
+  function addItem(item) {
+    // If it doesn't exist, add. If it exists, increase quantity.
     const existingItem = cart.find((x) => x.item.id === item.id);
 
     if (!existingItem) {
@@ -49,6 +73,10 @@ function App() {
   function clearCart() {
     setCart([]);
   }
+
+  // function saveCartToLocalStorage() {
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  // }
 
   //#endregion
 
