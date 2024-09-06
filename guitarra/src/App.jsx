@@ -3,7 +3,7 @@ import Header from './components/Header'
 import useCart from './hooks/useCart'
 
 function App() {
-  const { data, cart, addItem, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useCart();
+  const { data, cart, addItem, increaseQuantity, decreaseQuantity, removeFromCart, clearCart, isEmpty, cartTotal } = useCart();
 
   //#region Handlers
   function handleAddToCart(item) {
@@ -20,6 +20,8 @@ function App() {
         decreaseQuantity={decreaseQuantity}
         removeFromCart={removeFromCart}
         clearCart={clearCart}
+        isEmpty={isEmpty}
+        cartTotal={cartTotal}
       />
 
       <main className="container-xl mt-5">
