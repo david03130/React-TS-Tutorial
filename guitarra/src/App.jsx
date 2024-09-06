@@ -4,7 +4,7 @@ import Header from './components/Header'
 import { db } from './data/db';
 
 function App() {
-  const [data, setData] = useState(db);
+  const [data] = useState(db);
   const [cart, setCart] = useState(initialCart);
 
   //#region Effect Hooks
